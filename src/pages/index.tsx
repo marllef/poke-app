@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { NavHeader } from "~/components/NavHeader";
+import { PokeList } from "~/components/PokeList";
 import { TeamArea } from "~/components/TeamArea";
 import useData from "~/hooks/useData";
 
@@ -16,7 +17,8 @@ const Home: NextPage = () => {
 
       <main>
         <NavHeader />
-        <TeamArea team={data.splice(0, 8)} />
+        <TeamArea team={data} />
+        <PokeList data={data} />
       </main>
     </div>
   );

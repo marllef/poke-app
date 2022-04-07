@@ -1,8 +1,9 @@
 export interface Pokemon {
   id: number;
   name: string;
+  height: number;
   image: string;
-  type: string[];
+  types: string[];
 }
 
 export interface PokeAPIResults {
@@ -26,11 +27,19 @@ export interface PokeAPISprites {
   back_shiny: string;
   back_female: string;
   back_shiny_female: string;
+  other: {
+    "official-artwork": {
+      front_default: string;
+    };
+  };
 }
 
 export interface PokeAPIType {
   slot: number;
-  type: string;
+  type: {
+    name: string;
+    url: string;
+  };
 }
 
 export interface PokeAPIPokemon {

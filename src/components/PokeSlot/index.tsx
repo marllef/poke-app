@@ -1,41 +1,23 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { PokeAPIPokemon, Pokemon } from "~/interfaces/PokeAPI/Pokemons";
+import { getTypeColor } from "~/utils/PokeTypesMap";
 import { Container, PokeDot, PokePart, PokeSprite } from "./styles";
 
 interface Props {
-  typeColor?: string;
-  pokeUrl?: string;
+  pokemon?: Pokemon;
+  selected?: boolean;
 }
 
-export const PokeSlot = ({ typeColor = "white", pokeUrl: url }: Props) => {
-  const [pokeInfo, setPokeInfo] = useState<Pokemon>();
-
+export const PokeSlot = ({ pokemon, selected = false }: Props) => {
   useEffect(() => {
-    if (url) {
-      fetch(url)
-        .then((res) => res.json())
-        .then((data: PokeAPIPokemon) =>
-          setPokeInfo({
-            name: data.name,
-            id: data.id,
-            image: data.sprites.front_default,
-            type: data.types.map((type) => type.type),
-          })
-        );
-    }
-  }, [url]);
-
-  useEffect(() => {
-    console.log(pokeInfo);
-  }, [pokeInfo]);
-
+    console.log(pokemon);
+  }, []);
   return (
     <Container>
+      <PokeSprite src={pokemon?.image} height={pokemon?.height} />
       <PokeDot />
-      <PokeSprite src={pokeInfo?.image} />
-
-      <PokePart color={typeColor} />
+      <PokePart color={getTypeColor(pokemon?.types[0]!)} />
       <PokePart angle={180} />
     </Container>
   );

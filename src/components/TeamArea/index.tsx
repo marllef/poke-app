@@ -1,10 +1,10 @@
 import { Container, PokeRow, TeamBox, TeamHeader } from "./styles";
 import { PokeSlot } from "~/components/PokeSlot";
 import { useEffect } from "react";
-import { PokeAPIResults } from "~/interfaces/PokeAPI/Pokemons";
+import { PokeAPIResults, Pokemon } from "~/interfaces/PokeAPI/Pokemons";
 
 interface Props {
-  team?: PokeAPIResults[];
+  team?: Pokemon[];
 }
 
 export const TeamArea = ({ team = [] }: Props) => {
@@ -14,15 +14,15 @@ export const TeamArea = ({ team = [] }: Props) => {
         <TeamHeader>My Team</TeamHeader>
 
         <PokeRow line={0}>
-          <PokeSlot pokeUrl={team[0]?.url} />
-          <PokeSlot pokeUrl={team[1]?.url} />
-          <PokeSlot pokeUrl={team[2]?.url} />
+          <PokeSlot pokemon={team[0]} />
+          <PokeSlot pokemon={team[1]} />
+          <PokeSlot pokemon={team[2]} />
         </PokeRow>
 
         <PokeRow line={1}>
-          <PokeSlot pokeUrl={team[3]?.url} />
-          <PokeSlot pokeUrl={team[4]?.url} />
-          <PokeSlot pokeUrl={team[5]?.url} />
+          <PokeSlot pokemon={team[3]} />
+          <PokeSlot pokemon={team[4]} />
+          <PokeSlot pokemon={team[5]} />
         </PokeRow>
       </TeamBox>
     </Container>

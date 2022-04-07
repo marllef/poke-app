@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   position: relative;
   padding: 0 5px;
+  overflow: hidden;
 `;
 
 export const PokeDot = styled.div`
@@ -23,8 +24,8 @@ export const PokeSprite = styled.img`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 110px;
-  height: 110px;
+  width: 90px;
+  height: 90px;
   border-radius: 100%;
   z-index: 999;
 `;
