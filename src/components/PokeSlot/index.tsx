@@ -9,13 +9,20 @@ interface Props {
   selected?: boolean;
 }
 
-export const PokeSlot = ({ pokemon, selected = false }: Props) => {
+export const PokeSlot = ({ pokemon, selected = true }: Props) => {
   useEffect(() => {
     console.log(pokemon);
   }, []);
   return (
     <Container>
-      <PokeSprite src={pokemon?.image} height={pokemon?.height} />
+      {pokemon && (
+        <PokeSprite
+          src={pokemon.image}
+          height={pokemon.height}
+          alt="Imagem Pokemon"
+        />
+      )}
+
       <PokeDot />
       <PokePart color={getTypeColor(pokemon?.types[0]!)} />
       <PokePart angle={180} />

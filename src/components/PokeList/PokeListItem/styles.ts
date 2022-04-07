@@ -47,3 +47,19 @@ export const TypeBar = styled.div<{ color?: string }>`
   margin: 0px 2px;
   background-color: ${({ color = "transparent" }) => color};
 `;
+
+export const SelectedIcon = styled.div`
+  display: flex;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  background: rgba(143, 218, 88, 0.9);
+  border-radius: 100%;
+  z-index: 999;
+`;

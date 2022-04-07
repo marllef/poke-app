@@ -2,12 +2,13 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import {
   PokeAPIPokemon,
   PokeAPIResponse,
-  PokeAPIResults,
   Pokemon,
 } from "~/interfaces/PokeAPI/Pokemons";
 
 type ContextType = {
   data: Pokemon[];
+  next: { (): void };
+  previous: { (): void };
 };
 
 interface Props {
@@ -18,11 +19,18 @@ export const PokeDataContext = createContext<ContextType | null>(null);
 
 export const PokemonProvider = ({ children }: Props) => {
   const [data, setData] = useState<Pokemon[]>([]);
+  const [fetchURL, setFetchURL] = useState(
+    "https://pokeapi.co/api/v2/pokemon/"
+  );
+  const [next, setNext] = useState<string | null>("");
+  const [previous, setPrevious] = useState<string | null>("");
 
   useEffect(() => {
-    fetch("https://pokeapi.co/api/v2/pokemon/")
+    fetch(fetchURL)
       .then((response) => response.json())
       .then((data: PokeAPIResponse) => {
+        setNext(data.next);
+        setPrevious(data.previous);
         const pokemons = Promise.all(
           data.results.map((poke) => fetchPokemon(poke.url))
         );
@@ -30,7 +38,7 @@ export const PokemonProvider = ({ children }: Props) => {
         pokemons.then((data) => setData(data));
       })
       .catch((err) => console.log(err.message));
-  }, []);
+  }, [fetchURL]);
 
   async function fetchPokemon(url: string) {
     const response = await fetch(url);
@@ -46,8 +54,22 @@ export const PokemonProvider = ({ children }: Props) => {
     };
   }
 
-  const values = {
+  function nextPage() {
+    if (next) {
+      setFetchURL(next);
+    }
+  }
+
+  function previousPage() {
+    if (previous) {
+      setFetchURL(previous);
+    }
+  }
+
+  const values: ContextType = {
     data,
+    next: nextPage,
+    previous: previousPage,
   };
   return (
     <PokeDataContext.Provider value={values}>

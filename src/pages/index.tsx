@@ -3,6 +3,7 @@ import Head from "next/head";
 import { NavHeader } from "~/components/NavHeader";
 import { PokeList } from "~/components/PokeList";
 import { TeamArea } from "~/components/TeamArea";
+import { SelectProvider } from "~/contexts/SelectContext";
 import useData from "~/hooks/useData";
 
 const Home: NextPage = () => {
@@ -17,8 +18,10 @@ const Home: NextPage = () => {
 
       <main>
         <NavHeader />
-        <TeamArea team={data} />
-        <PokeList data={data} />
+        <SelectProvider>
+          <TeamArea team={[]} />
+          <PokeList data={data} />
+        </SelectProvider>
       </main>
     </div>
   );

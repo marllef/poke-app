@@ -3,10 +3,11 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+
   width: 100%;
   height: 100%;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 `;
 
 export const List = styled.ul`
@@ -24,6 +25,9 @@ export const ItemList = styled.li`
 `;
 
 export const ListHeading = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
   padding: 0.75rem 1rem;
   font-weight: 600;
   font-size: larger;
@@ -31,5 +35,7 @@ export const ListHeading = styled.div`
 
 export const ListBox = styled.div`
   display: flex;
+  min-width: 375px;
+  max-width: 500px;
   flex-direction: column;
-`
+`;

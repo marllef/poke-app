@@ -5,17 +5,27 @@ import {
   PokemonID,
   PokemonName,
   PokemonSprite,
+  SelectedIcon,
   TypeBar,
   TypeContainer,
 } from "./styles";
 
-interface Props {
+import { FaCheck } from "react-icons/fa";
+import { HTMLAttributes } from "react";
+
+interface Props extends HTMLAttributes<HTMLElement> {
   pokemon: Pokemon;
+  selected?: boolean;
 }
 
-export const PokeListItem = ({ pokemon }: Props) => {
+export const PokeListItem = ({ pokemon, selected = false, ...rest }: Props) => {
   return (
-    <Container>
+    <Container {...rest}>
+      {selected && (
+        <SelectedIcon>
+          <FaCheck />
+        </SelectedIcon>
+      )}
       <PokemonID>#{pokemon.id}</PokemonID>
       <PokemonSprite src={pokemon.image} />
       <PokemonName>{pokemon.name}</PokemonName>
