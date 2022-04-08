@@ -4,23 +4,29 @@ import { NavHeader } from "~/components/NavHeader";
 import { PokeList } from "~/components/PokeList";
 import { TeamArea } from "~/components/TeamArea";
 import { SelectProvider } from "~/contexts/SelectContext";
-
+import useSelectPokemon from "~/hooks/useSelectPokemon";
 
 const Home: NextPage = () => {
+  const { selected } = useSelectPokemon();
   return (
     <div>
       <Head>
-        <title>PokeAPP</title>
+        <title>PokeAPP | Create Team</title>
         <meta name="description" content="Crie seu time pokemon!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
         <NavHeader />
-        <SelectProvider>
-          <TeamArea team={[]} />
-          <PokeList />
-        </SelectProvider>
+
+        <TeamArea
+          pokeTeam={{
+            name: "Nova Equipe",
+            pokemons: selected,
+          }}
+          showActions
+        />
+        <PokeList />
       </main>
     </div>
   );

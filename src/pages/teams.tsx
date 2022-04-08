@@ -1,11 +1,26 @@
-import type { NextPage } from "next";
+import { PrismaClient } from "@prisma/client";
+import type {
+  GetServerSideProps,
+  InferGetServerSidePropsType,
+  NextPage,
+} from "next";
 import Head from "next/head";
+import { useEffect, useState } from "react";
 import { NavHeader } from "~/components/NavHeader";
-import { PokeList } from "~/components/PokeList";
 import { TeamArea } from "~/components/TeamArea";
+import { TeamList } from "~/components/TeamList";
 import { SelectProvider } from "~/contexts/SelectContext";
+import { PokeTeam } from "~/interfaces/PokeAPI/Pokemons";
+import { DatabaseServices } from "~/services/DatabaseServices";
 
-const Home: NextPage = () => {
+const TeamsPage: NextPage = () => {
+  const [teams, setTeams] = useState<PokeTeam[]>();
+  useEffect(() => {
+    const userTeams = DatabaseServices.getTeams();
+    if (userTeams) {
+      setTeams(userTeams);
+    }
+  }, []);
   return (
     <div>
       <Head>
@@ -14,14 +29,18 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <main
+        style={{
+          overflow: "hidden",
+        }}
+      >
         <NavHeader title="Create New Team" />
         <SelectProvider>
-          <TeamArea />
+          <TeamList data={teams || []} />
         </SelectProvider>
       </main>
     </div>
   );
 };
 
-export default Home;
+export default TeamsPage;

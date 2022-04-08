@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const DelButton = styled.button<{ disabled?: boolean }>`
+export const SButton = styled.button<{ disabled?: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,6 +12,6 @@ export const DelButton = styled.button<{ disabled?: boolean }>`
   font-size: large;
   color: white;
   cursor: ${({ disabled }) => (disabled ? "" : "pointer")};
-  background-color: ${({ disabled }) => (disabled ? "#EEBFBC" : "#F8635A")};
+  background-color: ${({ disabled }) => (disabled ? "#C7EFAA" : "#8FDA58")};
   align-self: flex-end;
 `;

@@ -1,9 +1,14 @@
 export interface Pokemon {
   id: number;
   name: string;
-  height: number;
   image: string;
   types: string[];
+}
+
+export interface PokeTeam {
+  id?: string;
+  name: string;
+  pokemons: Pokemon[];
 }
 
 export interface PokeAPIResults {

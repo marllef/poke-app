@@ -23,9 +23,9 @@ export const TeamBox = styled.div`
   flex-direction: column;
 `;
 
-export const PokeRow = styled.div<{ line?: number }>`
+export const PokeRow = styled.div<{ align?: string }>`
   display: flex;
   width: 100%;
-  justify-content: ${({ line = 0 }: any) =>
-    line === 0 ? "flex-start" : "flex-end"};
+  justify-content: ${({ align = "left" }: any) =>
+    align === "left" ? "flex-start" : "flex-end"};
 `;
