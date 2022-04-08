@@ -26,6 +26,7 @@ export const PokeSprite = styled.img`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90px;
+
   height: 90px;
   z-index: 100;
 `;
@@ -39,4 +40,3 @@ export const PokePart = styled.div<{ angle?: number; color?: string }>`
   transform: ${({ angle = 0 }: any) => `rotate(${angle}deg)`};
   background-color: ${({ color = "white" }) => color};
 `;
-

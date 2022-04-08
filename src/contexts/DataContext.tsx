@@ -1,4 +1,12 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import useFetcher from "~/hooks/useFetcher";
 import {
   PokeAPIPokemon,
   PokeAPIResponse,
@@ -8,7 +16,6 @@ import {
 type ContextType = {
   data: Pokemon[];
   next: { (): void };
-  previous: { (): void };
 };
 
 interface Props {
@@ -19,26 +26,32 @@ export const PokeDataContext = createContext<ContextType | null>(null);
 
 export const PokemonProvider = ({ children }: Props) => {
   const [data, setData] = useState<Pokemon[]>([]);
+  const [nextPage, setNextPage] = useState<string | null>(null);
+  const [pageCount, setPageCount] = useState(0);
+
   const [fetchURL, setFetchURL] = useState(
-    "https://pokeapi.co/api/v2/pokemon/"
+    "https://pokeapi.co/api/v2/pokemon/?limit=60"
   );
-  const [next, setNext] = useState<string | null>("");
-  const [previous, setPrevious] = useState<string | null>("");
 
   useEffect(() => {
     fetch(fetchURL)
       .then((response) => response.json())
-      .then((data: PokeAPIResponse) => {
-        setNext(data.next);
-        setPrevious(data.previous);
+      .then((ApiRes: PokeAPIResponse) => {
         const pokemons = Promise.all(
-          data.results.map((poke) => fetchPokemon(poke.url))
+          ApiRes.results.map((poke) => fetchPokemon(poke.url))
         );
+        console.log("Buscando dados... ");
 
-        pokemons.then((data) => setData(data));
-      })
-      .catch((err) => console.log(err.message));
-  }, [fetchURL]);
+        if (!data.length) {
+          pokemons.then((data) => setData(data));
+        } else {
+          pokemons.then((newData) =>
+            setData((prevData) => [...prevData, ...newData])
+          );
+        }
+        setNextPage(ApiRes.next);
+      });
+  }, [fetchURL, setNextPage]);
 
   async function fetchPokemon(url: string) {
     const response = await fetch(url);
@@ -54,22 +67,16 @@ export const PokemonProvider = ({ children }: Props) => {
     };
   }
 
-  function nextPage() {
-    if (next) {
-      setFetchURL(next);
-    }
-  }
-
-  function previousPage() {
-    if (previous) {
-      setFetchURL(previous);
-    }
-  }
+  const pager = () => {
+    console.log("PageCount: ", pageCount);
+    setPageCount((old) => old + 1);
+    console.log("NextFunc:", nextPage);
+    setFetchURL(nextPage!);
+  };
 
   const values: ContextType = {
     data,
-    next: nextPage,
-    previous: previousPage,
+    next: pager,
   };
   return (
     <PokeDataContext.Provider value={values}>

@@ -1,6 +1,4 @@
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { PokeAPIPokemon, Pokemon } from "~/interfaces/PokeAPI/Pokemons";
+import { Pokemon } from "~/interfaces/PokeAPI/Pokemons";
 import { getTypeColor } from "~/utils/PokeTypesMap";
 import { Container, PokeDot, PokePart, PokeSprite } from "./styles";
 
@@ -10,9 +8,6 @@ interface Props {
 }
 
 export const PokeSlot = ({ pokemon, selected = true }: Props) => {
-  useEffect(() => {
-    console.log(pokemon);
-  }, []);
   return (
     <Container>
       {pokemon && (
