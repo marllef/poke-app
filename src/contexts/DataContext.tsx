@@ -6,7 +6,6 @@ import {
   useRef,
   useState,
 } from "react";
-import useFetcher from "~/hooks/useFetcher";
 import {
   PokeAPIPokemon,
   PokeAPIResponse,
@@ -15,6 +14,8 @@ import {
 
 type ContextType = {
   data: Pokemon[];
+  loading: boolean;
+  nItems: number;
   next: { (): void };
 };
 
@@ -26,33 +27,52 @@ export const PokeDataContext = createContext<ContextType | null>(null);
 
 export const PokemonProvider = ({ children }: Props) => {
   const [data, setData] = useState<Pokemon[]>([]);
+  const [loading, setLoading] = useState(false);
   const [nextPage, setNextPage] = useState<string | null>(null);
-  const [pageCount, setPageCount] = useState(0);
+  const [pageCount, setPageCount] = useState(1);
+  const [nItems, setNItens] = useState(0);
 
-  const [fetchURL, setFetchURL] = useState(
-    "https://pokeapi.co/api/v2/pokemon/?limit=60"
-  );
-
+  // initial fetch
   useEffect(() => {
-    fetch(fetchURL)
+    setLoading(true);
+    fetch("https://pokeapi.co/api/v2/pokemon/?limit=80")
       .then((response) => response.json())
       .then((ApiRes: PokeAPIResponse) => {
         const pokemons = Promise.all(
           ApiRes.results.map((poke) => fetchPokemon(poke.url))
         );
-        console.log("Buscando dados... ");
 
-        if (!data.length) {
-          pokemons.then((data) => setData(data));
-        } else {
-          pokemons.then((newData) =>
-            setData((prevData) => [...prevData, ...newData])
-          );
-        }
+        pokemons.then((newData) => {
+          setData(newData);
+        });
+
         setNextPage(ApiRes.next);
       });
-  }, [fetchURL, setNextPage]);
+  }, []);
 
+  // fetch with pagination
+  useEffect(() => {
+    if (nextPage) {
+      setLoading(true);
+      fetch(nextPage)
+        .then((response) => response.json())
+        .then((ApiRes: PokeAPIResponse) => {
+          setNItens(ApiRes.count);
+
+          const pokemons = Promise.all(
+            ApiRes.results.map((poke) => fetchPokemon(poke.url))
+          );
+
+          pokemons.then((newData) => {
+            setData((prevData) => [...prevData, ...newData]);
+          });
+
+          setNextPage(ApiRes.next);
+        });
+    }
+  }, [pageCount]);
+
+  // fetch pokemon function
   async function fetchPokemon(url: string) {
     const response = await fetch(url);
 
@@ -68,14 +88,17 @@ export const PokemonProvider = ({ children }: Props) => {
   }
 
   const pager = () => {
-    console.log("PageCount: ", pageCount);
-    setPageCount((old) => old + 1);
-    console.log("NextFunc:", nextPage);
-    setFetchURL(nextPage!);
+    setPageCount((value) => value + 1);
+
+    if (data.length === nItems) {
+      setLoading(false);
+    }
   };
 
   const values: ContextType = {
     data,
+    loading,
+    nItems,
     next: pager,
   };
   return (

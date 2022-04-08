@@ -6,7 +6,6 @@ const useData = () => {
 
   return {
     data,
-
     ...rest,
   };
 };
