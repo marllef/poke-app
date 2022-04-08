@@ -10,13 +10,7 @@ interface Props {
 export const PokeSlot = ({ pokemon, selected = true }: Props) => {
   return (
     <Container>
-      {pokemon && (
-        <PokeSprite
-          src={pokemon.image}
-          height={pokemon.height}
-          alt="Imagem Pokemon"
-        />
-      )}
+      {pokemon && <PokeSprite src={pokemon.image} alt="Imagem Pokemon" />}
 
       <PokeDot />
       <PokePart color={getTypeColor(pokemon?.types[0]!)} />
