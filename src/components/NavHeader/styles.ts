@@ -17,7 +17,8 @@ export const Separator = styled.div`
   width: 100%;
   height: 1px;
 `;
-export const Text = styled.div`
+export const Text = styled.a`
+  cursor: pointer;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   padding-top: 0.7rem;

@@ -3,6 +3,7 @@ import { PokeSlot } from "~/components/PokeSlot";
 import { useEffect } from "react";
 import { PokeAPIResults, Pokemon } from "~/interfaces/PokeAPI/Pokemons";
 import useSelectPokemon from "~/hooks/useSelectPokemon";
+import { DeleteButton } from "../Button/Delete";
 
 interface Props {
   team?: Pokemon[];
@@ -26,6 +27,7 @@ export const TeamArea = ({ team = [] }: Props) => {
           <PokeSlot pokemon={selected[4]} />
           <PokeSlot pokemon={selected[5]} />
         </PokeRow>
+        <DeleteButton />
       </TeamBox>
     </Container>
   );

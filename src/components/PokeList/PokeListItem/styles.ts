@@ -30,6 +30,7 @@ export const PokemonName = styled.span``;
 
 export const PokemonSprite = styled.img`
   width: 70px;
+  cursor: pointer;
   z-index: 99;
 `;
 
@@ -61,5 +62,6 @@ export const SelectedIcon = styled.div`
   height: 40px;
   background: rgba(143, 218, 88, 0.9);
   border-radius: 100%;
+  cursor: pointer;
   z-index: 999;
 `;

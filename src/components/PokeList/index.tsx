@@ -5,8 +5,8 @@ import { PokeListItem } from "./PokeListItem";
 import { Container, List, ListBox, ListHeading } from "./styles";
 
 export const PokeList = () => {
-  const { data, next, loading, nItems } = useData();
   const lastItemRef = useRef(null);
+  const { data, next, loading } = useData();
 
   const { selectPokemon, selected } = useSelectPokemon();
 
@@ -36,14 +36,16 @@ export const PokeList = () => {
         <ListBox>
           <ListHeading>Choose 6 Pokemons:</ListHeading>
           <List>
-            {data.map((pokemon) => (
-              <PokeListItem
-                key={pokemon.name}
-                pokemon={pokemon}
-                selected={selected.includes(pokemon)}
-                onClick={() => selectPokemon(pokemon)}
-              />
-            ))}
+            {data
+              .filter((pokemon) => pokemon.id < 10000)
+              .map((pokemon) => (
+                <PokeListItem
+                  key={pokemon.name}
+                  pokemon={pokemon}
+                  selected={selected.includes(pokemon)}
+                  onClick={() => selectPokemon(pokemon)}
+                />
+              ))}
             {loading && <div>Carregando...</div>}
             {!!data.length && <div ref={lastItemRef} />}
           </List>

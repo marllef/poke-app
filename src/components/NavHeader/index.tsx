@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Container, Separator, Text } from "./styles";
 
 interface Props {
@@ -8,7 +9,9 @@ export const NavHeader = ({ title = "TEAMS" }: Props) => {
   return (
     <Container>
       <Separator />
-      <Text>{title}</Text>
+      <Link href={title === "TEAMS" ? "/teams" : "/"}>
+        <Text>{title.toLocaleUpperCase()}</Text>
+      </Link>
     </Container>
   );
 };

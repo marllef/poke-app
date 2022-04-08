@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   position: relative;
+  cursor: pointer;
   padding: 0 5px;
   overflow: hidden;
 `;
