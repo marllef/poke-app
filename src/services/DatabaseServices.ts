@@ -21,10 +21,15 @@ export const DatabaseServices = {
     return null;
   },
 
-  removeTeamById: (id: string) => {
-    const teams = storage.removeItem<PokeTeam[]>("PokeTeams");
+  clearTeams: () => {
+    storage.removeItem<PokeTeam[]>("PokeTeams");
+  },
+
+  deleteTeamByID: (id: string) => {
+    const teams = storage.getItem<PokeTeam[]>("PokeTeams");
     if (teams?.length) {
-      const team = teams.filter((team) => team.id === id)[0];
+      const team = teams.filter((team) => team.id !== id);
+      storage.setItem("PokeTeams", team);
       return team;
     }
 
@@ -33,26 +38,21 @@ export const DatabaseServices = {
 
   addTeam: (team: PokeTeam) => {
     const { id, ...rest } = team;
+
     const prevTeams = storage.getItem<PokeTeam[]>("PokeTeams");
 
     if (prevTeams) {
       const created: PokeTeam[] = storage.setItem("PokeTeams", [
         ...prevTeams,
         {
-          id: prevTeams.length + 1,
+          id: crypto.randomUUID(),
           ...rest,
         },
       ]);
 
+      console.log(created);
+
       return created.filter((item) => item.name === rest.name)[0];
-    } else {
-      const created: PokeTeam[] = storage.setItem("PokeTeams", [
-        {
-          id: 0,
-          ...rest,
-        },
-      ]);
-      return created[0];
     }
   },
 };

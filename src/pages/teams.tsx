@@ -7,7 +7,6 @@ import type {
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { NavHeader } from "~/components/NavHeader";
-import { TeamArea } from "~/components/TeamArea";
 import { TeamList } from "~/components/TeamList";
 import { SelectProvider } from "~/contexts/SelectContext";
 import { PokeTeam } from "~/interfaces/PokeAPI/Pokemons";

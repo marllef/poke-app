@@ -15,6 +15,13 @@ export const TeamHeader = styled.div`
   font-size: larger;
 `;
 
+export const HeaderGroup = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: start;
+  align-items: center;
+`;
+
 export const TeamBox = styled.div`
   display: flex;
   flex: 1;
