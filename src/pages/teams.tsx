@@ -15,12 +15,14 @@ import { DatabaseServices } from "~/services/DatabaseServices";
 
 const TeamsPage: NextPage = () => {
   const [teams, setTeams] = useState<PokeTeam[]>();
+
   useEffect(() => {
     const userTeams = DatabaseServices.getTeams();
     if (userTeams) {
       setTeams(userTeams);
     }
   }, []);
+
   return (
     <div>
       <Head>

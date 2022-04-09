@@ -3,7 +3,6 @@ import Head from "next/head";
 import { NavHeader } from "~/components/NavHeader";
 import { PokeList } from "~/components/PokeList";
 import { TeamArea } from "~/components/TeamArea";
-import { SelectProvider } from "~/contexts/SelectContext";
 import useSelectPokemon from "~/hooks/useSelectPokemon";
 
 const Home: NextPage = () => {
@@ -16,7 +15,11 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <main
+        style={{
+          overflow: "hidden",
+        }}
+      >
         <NavHeader />
 
         <TeamArea
@@ -24,6 +27,7 @@ const Home: NextPage = () => {
             name: "Nova Equipe",
             pokemons: selected,
           }}
+          editable
           showActions
         />
         <PokeList />

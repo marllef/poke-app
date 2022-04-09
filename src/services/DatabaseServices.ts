@@ -21,6 +21,16 @@ export const DatabaseServices = {
     return null;
   },
 
+  removeTeamById: (id: string) => {
+    const teams = storage.removeItem<PokeTeam[]>("PokeTeams");
+    if (teams?.length) {
+      const team = teams.filter((team) => team.id === id)[0];
+      return team;
+    }
+
+    return null;
+  },
+
   addTeam: (team: PokeTeam) => {
     const { id, ...rest } = team;
     const prevTeams = storage.getItem<PokeTeam[]>("PokeTeams");

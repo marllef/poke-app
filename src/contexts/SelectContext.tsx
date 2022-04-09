@@ -1,13 +1,11 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
-import {
-  PokeAPIPokemon,
-  PokeAPIResponse,
-  Pokemon,
-} from "~/interfaces/PokeAPI/Pokemons";
+import { createContext, ReactNode, useState } from "react";
+import { Pokemon } from "~/interfaces/PokeAPI/Pokemons";
 
 type ContextType = {
-  selected: Pokemon[];
+  pokeSelected: Pokemon[];
   selectPokemon: { (poke: Pokemon): void };
+  selectedSlot?: Pokemon;
+  selectSlot: { (slot?: Pokemon): void };
 };
 
 interface Props {
@@ -17,21 +15,26 @@ interface Props {
 export const SelectContext = createContext<ContextType | null>(null);
 
 export const SelectProvider = ({ children }: Props) => {
-  const [selected, setSelected] = useState<Pokemon[]>([]);
+  const [pokeSelected, setSelected] = useState<Pokemon[]>([]);
+  const [selectedSlot, setSelectedSlot] = useState<Pokemon>();
 
   function selectPokemon(pokemon: Pokemon) {
-    if (selected.length < 6 && !selected.includes(pokemon)) {
+    if (pokeSelected.length < 6 && !pokeSelected.includes(pokemon)) {
       setSelected((value) => [...value, pokemon]);
     }
 
-    if (selected.includes(pokemon)) {
-      setSelected((previous) => previous.filter((poke) => poke.id !== pokemon.id));
+    if (pokeSelected.includes(pokemon)) {
+      setSelected((previous) =>
+        previous.filter((poke) => poke.id !== pokemon.id)
+      );
     }
   }
 
   const values: ContextType = {
-    selected,
+    pokeSelected: pokeSelected,
     selectPokemon,
+    selectedSlot: selectedSlot,
+    selectSlot: (slot) => setSelectedSlot(slot),
   };
 
   return (

@@ -12,7 +12,12 @@ export const storage = {
     return value;
   },
 
-  removeItem: (key: string) => {
+  removeItem: <T = any>(key: string) => {
+    const item = localStorage.getItem(key);
     localStorage.removeItem(key);
+    
+    if (item) {
+      return JSON.parse(item) as T;
+    }
   },
 };

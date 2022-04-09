@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.div<{ grayscale?: number }>`
   position: relative;
   cursor: pointer;
   padding: 0 5px;
   overflow: hidden;
+  filter: ${({ grayscale = 0 }) => `grayscale(${grayscale}%)`};
 `;
 
 export const PokeDot = styled.div`
