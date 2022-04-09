@@ -1,6 +1,6 @@
 /**
  * Define os serviços do banco de dados que serão utilizados pela aplicação.
- * 
+ *
  * Implementa metodos para facilitar o gerenciamento do banco de dados.
  */
 
@@ -57,6 +57,15 @@ export const DatabaseServices = {
     if (prevTeams) {
       const created: PokeTeam[] = storage.setItem("PokeTeams", [
         ...prevTeams,
+        {
+          id: crypto.randomUUID(),
+          ...rest,
+        },
+      ]);
+
+      return created.filter((item) => item.name === rest.name)[0];
+    } else {
+      const created: PokeTeam[] = storage.setItem("PokeTeams", [
         {
           id: crypto.randomUUID(),
           ...rest,
