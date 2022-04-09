@@ -35,7 +35,6 @@ export const PokeListItem = ({ pokemon, selected = false, ...rest }: Props) => {
           width={720}
           loading="eager"
           height={720}
-          priority={true}
         />
       </PokemonSprite>
       <PokemonName>{pokemon.name}</PokemonName>

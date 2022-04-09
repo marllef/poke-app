@@ -36,7 +36,6 @@ export const PokeSlot = ({ pokemon, isSelectable = false, ...rest }: Props) => {
             width={720}
             height={720}
             loading="eager"
-            priority={true}
           />
         </PokeSprite>
       )}
