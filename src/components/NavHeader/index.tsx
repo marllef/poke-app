@@ -5,11 +5,11 @@ interface Props {
   title?: string;
 }
 
-export const NavHeader = ({ title = "TEAMS" }: Props) => {
+export const NavHeader = ({ title = "EQUIPE" }: Props) => {
   return (
     <Container>
       <Separator />
-      <Link href={title === "TEAMS" ? "/teams" : "/"}>
+      <Link href={title === "EQUIPE" ? "/teams" : "/"}>
         <Text>{title.toLocaleUpperCase()}</Text>
       </Link>
     </Container>

@@ -31,7 +31,7 @@ const TeamsPage: NextPage = () => {
           overflow: "hidden",
         }}
       >
-        <NavHeader title="Create New Team" />
+        <NavHeader title="Criar Nova Equipe" />
         <SelectProvider>
           <TeamList data={teams || []} />
         </SelectProvider>

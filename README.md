@@ -26,3 +26,6 @@ Projeto `React` criado em `NextJS` e `Typescript` para consumir dados da `PokeAP
 ```sh
   npm run dev
 ```
+
+## ⚡ Acesse o Projeto
+_Uma versão de testes desse projeto pode ser acessado [neste link](https://poke-app-dusky.vercel.app/)._
