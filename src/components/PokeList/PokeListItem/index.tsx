@@ -28,15 +28,7 @@ export const PokeListItem = ({ pokemon, selected = false, ...rest }: Props) => {
         </SelectedIcon>
       )}
       <PokemonID>#{pokemon.id}</PokemonID>
-      <PokemonSprite>
-        <Image
-          src={pokemon.image}
-          alt="Image from Pokemon"
-          width={720}
-          loading="eager"
-          height={720}
-        />
-      </PokemonSprite>
+      <PokemonSprite src={pokemon.image} alt="Image from Pokemon" />
       <PokemonName>{pokemon.name}</PokemonName>
       <TypeContainer>
         {pokemon.types.map((type, index) => (

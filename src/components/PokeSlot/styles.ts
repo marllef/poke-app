@@ -21,7 +21,7 @@ export const PokeDot = styled.div`
   z-index: 98;
 `;
 
-export const PokeSprite = styled.div`
+export const PokeSprite = styled.img`
   position: absolute;
   border: none;
   float: left;

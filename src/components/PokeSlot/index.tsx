@@ -28,17 +28,7 @@ export const PokeSlot = ({ pokemon, isSelectable = false, ...rest }: Props) => {
       onClick={() => isSelectable && selectSlot(pokemon)}
       {...rest}
     >
-      {!!pokemon && (
-        <PokeSprite>
-          <Image
-            src={pokemon.image}
-            alt="Pokemon Image"
-            width={720}
-            height={720}
-            loading="eager"
-          />
-        </PokeSprite>
-      )}
+      {!!pokemon && <PokeSprite src={pokemon.image} alt="Pokemon Image" />}
 
       <PokeDot />
       <PokePart color={getTypeColor(pokemon?.types[0]!)} />
