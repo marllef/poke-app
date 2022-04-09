@@ -15,6 +15,10 @@ export const PokeSlot = ({ pokemon, isSelectable = false, ...rest }: Props) => {
 
   useEffect(() => {
     setIsSelected(selectedSlot === pokemon);
+
+    if (!selectedSlot) {
+      setIsSelected(true);
+    }
   }, [selectedSlot]);
 
   return (

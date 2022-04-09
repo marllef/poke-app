@@ -6,7 +6,7 @@ import { SaveButton } from "../Button/Save";
 
 import { useEffect, useState } from "react";
 import { DatabaseServices as database } from "~/services/DatabaseServices";
-import { PokeTeam } from "~/interfaces/PokeAPI/Pokemons";
+import { Pokemon, PokeTeam } from "~/interfaces/PokeAPI/Pokemons";
 import { useRouter } from "next/router";
 import useSelectPokemon from "~/hooks/useSelectPokemon";
 
@@ -24,7 +24,8 @@ export const TeamArea = ({
   const [team, setTeam] = useState<PokeTeam>();
   const [title, setTitle] = useState(pokeTeam.name);
   const router = useRouter();
-  const { selectedSlot, selectPokemon, selected } = useSelectPokemon();
+  const { selectedSlot, selectSlot, selectPokemon, selected } =
+    useSelectPokemon();
 
   useEffect(() => {
     setTeam(pokeTeam);
@@ -48,6 +49,8 @@ export const TeamArea = ({
     selected
       .filter((item) => item.id === selectedSlot?.id)
       .map((poke) => selectPokemon(poke));
+
+    selectSlot();
   }
 
   function editTitle(value: string) {

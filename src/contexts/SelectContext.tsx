@@ -16,6 +16,7 @@ export const SelectContext = createContext<ContextType | null>(null);
 
 export const SelectProvider = ({ children }: Props) => {
   const [pokeSelected, setSelected] = useState<Pokemon[]>([]);
+
   const [selectedSlot, setSelectedSlot] = useState<Pokemon>();
 
   function selectPokemon(pokemon: Pokemon) {
@@ -27,6 +28,7 @@ export const SelectProvider = ({ children }: Props) => {
       setSelected((previous) =>
         previous.filter((poke) => poke.id !== pokemon.id)
       );
+      setSelectedSlot(undefined);
     }
   }
 
