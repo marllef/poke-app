@@ -40,6 +40,7 @@ export const TeamArea = ({
 
       if (createdTeam) {
         console.log(`${createdTeam.name} foi criado!`);
+        selected.splice(0, 6);
         router.push("/teams");
       }
     }
