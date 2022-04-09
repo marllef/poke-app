@@ -5,7 +5,14 @@ import useSelectPokemon from "~/hooks/useSelectPokemon";
 import { PokeTeam } from "~/interfaces/PokeAPI/Pokemons";
 import { DatabaseServices } from "~/services/DatabaseServices";
 import { TeamArea } from "../TeamArea";
-import { Container, List, ListBox, ListHeading } from "./styles";
+import {
+  Container,
+  Divider,
+  List,
+  ListBox,
+  ListHeading,
+  ListItem,
+} from "./styles";
 
 interface Props {
   data: PokeTeam[];
@@ -29,12 +36,14 @@ export const TeamList = ({ data: pokeTeams }: Props) => {
       <Container>
         <ListBox>
           <List>
-            {(data || []).map((team) => (
-              <TeamArea
-                key={team.id}
-                pokeTeam={team}
-                onDelete={() => handleDelete(team.id)}
-              />
+            {(data || []).map((team, index) => (
+              <ListItem key={team.id}>
+                <TeamArea
+                  pokeTeam={team}
+                  onDelete={() => handleDelete(team.id)}
+                />
+                {index < data?.length - 1 && <Divider />}
+              </ListItem>
             ))}
           </List>
         </ListBox>

@@ -28,7 +28,7 @@ export const PokemonID = styled.span`
 
 export const PokemonName = styled.span``;
 
-export const PokemonSprite = styled.img`
+export const PokemonSprite = styled.div`
   width: 70px;
   cursor: pointer;
   z-index: 99;

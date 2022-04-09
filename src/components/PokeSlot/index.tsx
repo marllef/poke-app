@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { HTMLAttributes, useEffect, useState } from "react";
 import useSelectPokemon from "~/hooks/useSelectPokemon";
 import { Pokemon } from "~/interfaces/PokeAPI/Pokemons";
@@ -27,7 +28,17 @@ export const PokeSlot = ({ pokemon, isSelectable = false, ...rest }: Props) => {
       onClick={() => isSelectable && selectSlot(pokemon)}
       {...rest}
     >
-      {pokemon && <PokeSprite src={pokemon.image} alt="Imagem Pokemon" />}
+      {!!pokemon && (
+        <PokeSprite>
+          <Image
+            src={pokemon.image}
+            alt="Pokemon Image"
+            width={720}
+            height={720}
+            priority={true}
+          />
+        </PokeSprite>
+      )}
 
       <PokeDot />
       <PokePart color={getTypeColor(pokemon?.types[0]!)} />

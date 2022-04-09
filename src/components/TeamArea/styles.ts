@@ -28,6 +28,7 @@ export const TeamBox = styled.div`
   width: 375px;
   justify-content: baseline;
   flex-direction: column;
+  
 `;
 
 export const PokeRow = styled.div<{ align?: string }>`

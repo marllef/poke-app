@@ -20,8 +20,16 @@ export const List = styled.ul`
   list-style: none;
 `;
 
-export const ItemList = styled.li`
-  padding: 1px 2px;
+export const ListItem = styled.li`
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+`;
+
+export const Divider = styled.div`
+  width: 85%;
+  border-bottom: 1px solid black;
 `;
 
 export const ListHeading = styled.div`

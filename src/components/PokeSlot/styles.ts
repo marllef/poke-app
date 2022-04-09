@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styled from "styled-components";
 
 export const Container = styled.div<{ grayscale?: number }>`
@@ -20,7 +21,7 @@ export const PokeDot = styled.div`
   z-index: 98;
 `;
 
-export const PokeSprite = styled.img`
+export const PokeSprite = styled.div`
   position: absolute;
   border: none;
   float: left;

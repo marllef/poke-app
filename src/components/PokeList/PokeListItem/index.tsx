@@ -12,6 +12,7 @@ import {
 
 import { FaCheck } from "react-icons/fa";
 import { HTMLAttributes } from "react";
+import Image from "next/image";
 
 interface Props extends HTMLAttributes<HTMLElement> {
   pokemon: Pokemon;
@@ -27,7 +28,15 @@ export const PokeListItem = ({ pokemon, selected = false, ...rest }: Props) => {
         </SelectedIcon>
       )}
       <PokemonID>#{pokemon.id}</PokemonID>
-      <PokemonSprite src={pokemon.image} />
+      <PokemonSprite>
+        <Image
+          src={pokemon.image}
+          alt="Image from Pokemon"
+          width={720}
+          height={720}
+          priority={true}
+        />
+      </PokemonSprite>
       <PokemonName>{pokemon.name}</PokemonName>
       <TypeContainer>
         {pokemon.types.map((type, index) => (
