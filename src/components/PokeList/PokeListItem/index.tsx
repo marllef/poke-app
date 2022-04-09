@@ -33,6 +33,7 @@ export const PokeListItem = ({ pokemon, selected = false, ...rest }: Props) => {
           src={pokemon.image}
           alt="Image from Pokemon"
           width={720}
+          loading="eager"
           height={720}
           priority={true}
         />
