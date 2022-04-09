@@ -1,11 +1,10 @@
-import {
-  createContext,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+/**
+ * Implementa um Provider para o contexto de dados (DataContext) que auxilia
+ * no gerenciamento de estados entre os componentes da aplicação.
+ */
+
+import { createContext, ReactNode, useEffect, useState } from "react";
+
 import {
   PokeAPIPokemon,
   PokeAPIResponse,
@@ -26,13 +25,14 @@ interface Props {
 export const PokeDataContext = createContext<ContextType | null>(null);
 
 export const PokemonProvider = ({ children }: Props) => {
+  // Definição de estados
   const [data, setData] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState(false);
   const [nextPage, setNextPage] = useState<string | null>(null);
   const [pageCount, setPageCount] = useState(1);
   const [nItems, setNItens] = useState(0);
 
-  // initial fetch
+  // Chamada inicial à API.
   useEffect(() => {
     setLoading(true);
     fetch("https://pokeapi.co/api/v2/pokemon/?limit=80")
@@ -50,7 +50,7 @@ export const PokemonProvider = ({ children }: Props) => {
       });
   }, []);
 
-  // fetch with pagination
+  // chamada à API baseada na paginação.
   useEffect(() => {
     if (nextPage) {
       setLoading(true);
@@ -72,7 +72,7 @@ export const PokemonProvider = ({ children }: Props) => {
     }
   }, [pageCount]);
 
-  // fetch pokemon function
+  // função auxiliar nas chamadas da API.
   async function fetchPokemon(url: string) {
     const response = await fetch(url);
 
@@ -87,6 +87,7 @@ export const PokemonProvider = ({ children }: Props) => {
     };
   }
 
+  // Auxilia na paginação
   const pager = () => {
     setPageCount((value) => value + 1);
 

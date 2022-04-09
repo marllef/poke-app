@@ -26,6 +26,7 @@ export const TeamList = ({ data: pokeTeams }: Props) => {
     setData(pokeTeams);
   }, [pokeTeams]);
 
+  // Deleta uma equipe pelo id
   function handleDelete(id: any) {
     DatabaseServices.deleteTeamByID(id);
     router.reload();

@@ -1,3 +1,4 @@
+// constante de tipos e suas cores
 const colors = {
   bug: "#89960B",
   dark: "#322C26",
@@ -21,6 +22,7 @@ const colors = {
 
 type color = typeof colors;
 
+// Função auxiliar para relacionar as cores aos tipos de pokemon
 export const getTypeColor = (type: string) => {
   return colors[type as keyof color];
 };

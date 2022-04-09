@@ -1,9 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-import type {
-  GetServerSideProps,
-  InferGetServerSidePropsType,
-  NextPage,
-} from "next";
+import type { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { NavHeader } from "~/components/NavHeader";
@@ -15,6 +10,7 @@ import { DatabaseServices } from "~/services/DatabaseServices";
 const TeamsPage: NextPage = () => {
   const [teams, setTeams] = useState<PokeTeam[]>();
 
+  // busca as equipes ao renderizar a pagina
   useEffect(() => {
     const userTeams = DatabaseServices.getTeams();
     if (userTeams) {

@@ -24,7 +24,7 @@ export const PokeSlot = ({ pokemon, isSelectable = false, ...rest }: Props) => {
 
   return (
     <Container
-      grayscale={isSelected ? 0 : 80}
+      grayscale={isSelected ? 0 : 90} // Destaca o pokemon do time selecionado na aba de criação
       onClick={() => isSelectable && selectSlot(pokemon)}
       {...rest}
     >

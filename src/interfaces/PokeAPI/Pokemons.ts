@@ -1,3 +1,8 @@
+/**
+ * Define algumas interfaces e tipagens utilizadas no projeto.
+ *
+ */
+
 export interface Pokemon {
   id: number;
   name: string;

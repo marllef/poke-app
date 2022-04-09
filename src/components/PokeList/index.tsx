@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import useData from "~/hooks/useData";
 import useSelectPokemon from "~/hooks/useSelectPokemon";
 import { PokeListItem } from "./PokeListItem";
@@ -10,6 +10,7 @@ export const PokeList = () => {
 
   const { selectPokemon, selected } = useSelectPokemon();
 
+  // Adiciona um observer ao final da lista para criar o scroll infinito
   useEffect(() => {
     const options = {
       root: null,
@@ -20,6 +21,7 @@ export const PokeList = () => {
     const observer = new IntersectionObserver((entities) => {
       const target = entities[0];
 
+      // Se o alvo estiver aparente, busca a proxima pagina de pokemons na API.
       if (target.isIntersecting) {
         next();
       }
@@ -34,10 +36,10 @@ export const PokeList = () => {
     <>
       <Container>
         <ListBox>
-          <ListHeading>Choose 6 Pokemons:</ListHeading>
+          <ListHeading>Escolha 6 Pokemons:</ListHeading>
           <List>
             {data
-              .filter((pokemon) => pokemon.id < 10000)
+              .filter((pokemon) => pokemon.id < 10000) // Filtra os pokemons
               .map((pokemon) => (
                 <PokeListItem
                   key={pokemon.name}

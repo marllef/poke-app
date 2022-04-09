@@ -1,3 +1,7 @@
+/**
+ * Implementa um custom Hook para facilitar a utilização do contexto.
+ */
+
 import { useContext } from "react";
 import { PokeDataContext } from "~/contexts/DataContext";
 
